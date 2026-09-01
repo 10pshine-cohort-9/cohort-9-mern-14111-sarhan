@@ -1,0 +1,249 @@
+@import "./styles/tokens.css";
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background-color: var(--color-accent-soft);
+    color: var(--color-ink);
+  }
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-faint);
+}
+
+@layer components {
+  .focus-ring:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-paper-3), 0 0 0 4px var(--color-focus);
+  }
+
+  .input-field {
+    @apply w-full rounded-lg border px-3.5 py-2.5 text-sm transition-colors;
+    background-color: var(--color-paper-3);
+    border-color: var(--color-border);
+    color: var(--color-ink);
+  }
+
+  .input-field::placeholder {
+    color: var(--color-ink-faint);
+  }
+
+  .input-field:hover {
+    border-color: var(--color-border-strong);
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    background-color: var(--color-paper-3);
+    box-shadow: 0 0 0 2px var(--color-paper-3), 0 0 0 4px var(--color-focus);
+  }
+
+  .select-field {
+    @apply w-full rounded-lg border px-3.5 py-2.5 text-sm transition-colors appearance-none cursor-pointer pr-9;
+    background-color: var(--color-paper-3);
+    border-color: var(--color-border);
+    color: var(--color-ink);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+  }
+
+  .select-field:hover {
+    border-color: var(--color-border-strong);
+  }
+
+  .select-field:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--color-paper-3), 0 0 0 4px var(--color-focus);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--color-accent);
+    color: var(--color-paper-3);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--color-paper-2);
+    color: var(--color-ink);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--color-paper);
+    border-color: var(--color-border-strong);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors disabled:opacity-50;
+    color: var(--color-ink-muted);
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    background-color: var(--color-paper-2);
+    color: var(--color-ink);
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all disabled:opacity-50;
+    background-color: var(--color-danger-soft);
+    color: var(--color-danger);
+    border: 1px solid transparent;
+  }
+
+  .btn-danger:hover:not(:disabled) {
+    background-color: var(--color-danger);
+    color: white;
+  }
+
+  .page-shell {
+    @apply flex flex-col h-full overflow-hidden;
+    background-color: var(--color-paper);
+  }
+
+  .page-content {
+    @apply flex-1 overflow-y-auto;
+  }
+
+  .page-inner {
+    @apply mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8;
+  }
+
+  /* TipTap editor prose */
+  .ProseMirror {
+    outline: none;
+    min-height: 280px;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-ink);
+  }
+
+  .ProseMirror ::selection,
+  .ProseMirror *::selection {
+    background-color: #b3d4fc;
+    color: inherit;
+  }
+
+  .ProseMirror p {
+    margin: 0 0 0.75em;
+  }
+
+  .ProseMirror h2 {
+    font-size: 1.25rem;
+    margin: 1.25em 0 0.5em;
+  }
+
+  .ProseMirror ul,
+  .ProseMirror ol {
+    padding-left: 1.5em;
+    margin: 0 0 0.75em;
+  }
+
+  .ProseMirror a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .ProseMirror strong {
+    font-weight: 600;
+  }
+
+  .ProseMirror h1 {
+    font-size: 1.5rem;
+    margin: 1.5em 0 0.5em;
+    font-weight: 700;
+  }
+
+  .ProseMirror h3 {
+    font-size: 1.125rem;
+    margin: 1.25em 0 0.5em;
+    font-weight: 600;
+  }
+
+  .ProseMirror blockquote {
+    border-left: 3px solid var(--color-border-strong);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: var(--color-ink-muted);
+    font-style: italic;
+  }
+
+  .ProseMirror code {
+    background-color: var(--color-paper-2);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.875em;
+    font-family: var(--font-mono);
+  }
+
+  .ProseMirror hr {
+    border: none;
+    border-top: 1px solid var(--color-border-strong);
+    margin: 2rem 0;
+  }
+}
